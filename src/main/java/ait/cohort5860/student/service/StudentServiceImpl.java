@@ -54,13 +54,16 @@ public class StudentServiceImpl implements StudentService {
         if (studentUpdateDto.getPassword() != null) {
             student.setPassword(studentUpdateDto.getPassword());
         }
+        studentRepository.save(student);
         return new StudentCredentialsDto(student.getId(), student.getName(), student.getPassword());
     }
 
     @Override
     public Boolean addScore(Long id, ScoreDto scoreDto) {
         Student student = studentRepository.findById(id).orElseThrow(NotFoundException::new);
-        return student.addScore(scoreDto.getExamName(),  scoreDto.getScore());
+        Boolean res = student.addScore(scoreDto.getExamName(),  scoreDto.getScore());
+        studentRepository.save(student);
+        return res;
     }
 
     @Override

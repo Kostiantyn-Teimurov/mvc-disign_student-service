@@ -42,8 +42,8 @@ public class StudentController {
         return studentService.addScore(id, scoreDto);
     }
 
-    @GetMapping("/students/name/{id}")
-    public List<StudentDto> findStudentsByName(String name) {
+    @GetMapping("/students/name/{name}")
+    public List<StudentDto> findStudentsByName(@PathVariable String name) {
         return studentService.findStudentsByName(name);
     }
 
